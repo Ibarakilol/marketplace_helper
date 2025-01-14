@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     PREFIX: str = "/api/v1"
     ENVIRONMENT: Literal["dev", "production"] = "dev"
 
-    ALGORITHM = "HS256"
+    ALGORITHM: str = "HS256"
     SECRET_KEY: str = "changethis"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # Week
 
