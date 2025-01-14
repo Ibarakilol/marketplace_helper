@@ -10,12 +10,12 @@ from app.user.models import Token, UserPublic, UserRegister
 from app.user.security import create_access_token
 from app.user.service import UserService
 
-router = APIRouter(prefix="/user", tags=["user"])
+router = APIRouter(prefix="/user", tags=["User"])
 
 
 @router.post("/register", response_model=UserPublic)
-def register_user(session: SessionDep, user_in: UserRegister):
-    user = UserService.get_user_by_email(session=session, email=user_in.email)
+async def register_user(session: SessionDep, user_in: UserRegister):
+    user = await UserService.get_user_by_email(session=session, email=user_in.email)
 
     if user:
         raise HTTPException(
@@ -23,13 +23,13 @@ def register_user(session: SessionDep, user_in: UserRegister):
         )
 
     new_user = UserRegister.model_validate(user_in)
-    user = UserService.create_user(session=session, new_user=new_user)
+    user = await UserService.create_user(session=session, new_user=new_user)
     return user
 
 
 @router.post("/login", response_model=Token)
-def login_user(session: SessionDep, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
-    user = UserService.authenticate_user(session=session, email=form_data.username, password=form_data.password)
+async def login_user(session: SessionDep, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    user = await UserService.authenticate_user(session=session, email=form_data.username, password=form_data.password)
 
     if not user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect email or password")

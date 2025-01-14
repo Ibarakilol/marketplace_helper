@@ -25,7 +25,7 @@ class User(UserBase, table=True):
 
 class Token(SQLModel):
     access_token: str
-    token_type: str = "bearer"
+    token_type: str = "Bearer"
 
 
 class TokenPayload(SQLModel):

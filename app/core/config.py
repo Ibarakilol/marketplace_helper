@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     @property
     def DATABASE_URI(self) -> MultiHostUrl:
         return MultiHostUrl.build(
-            scheme="postgresql+psycopg",
+            scheme="postgresql+asyncpg",
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             host=self.POSTGRES_SERVER,
