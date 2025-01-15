@@ -6,6 +6,7 @@ from sqlmodel import Field, SQLModel
 
 class UserBase(SQLModel):
     email: EmailStr = Field(unique=True, index=True, max_length=255)
+    wb_supplier_name: str | None = Field(default=None, index=True, max_length=255)
 
 
 class UserPublic(UserBase):
