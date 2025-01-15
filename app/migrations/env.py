@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlmodel import SQLModel
 
 from app.core.config import settings
-from app.user.models import User
+from app.users.models import User
 from app.wb.models import WbFeedback
 
 # this is the Alembic Config object, which provides
