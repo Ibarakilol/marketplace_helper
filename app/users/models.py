@@ -24,6 +24,11 @@ class User(UserBase, table=True):
     wb_api_key: str | None = None
 
 
+class UserUpdate(SQLModel):
+    wb_supplier_name: str | None = Field(default=None, index=True, max_length=255)
+    wb_api_key: str | None = None
+
+
 class Token(SQLModel):
     access_token: str
     token_type: str = "Bearer"

@@ -1,14 +1,19 @@
-import uuid
+from typing import Any
 
 from sqlmodel import Field, SQLModel
 
 
-class WbFeedback(SQLModel, table=True):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    feedback_id: str = Field(unique=True, index=True)
-    sku: int = Field(index=True)
-    product: str = Field(index=True)
-    product_valuation: int
-    with_photo: bool
+class WbFeedback(SQLModel):
+    feedback_id: str
+    sku: int
+    product_name: str
+    product_valuation: int = Field(ge=1, le=5)
+    name: str
     text: str | None = None
-    reply: str | None = None
+    with_photo: bool
+
+
+class WbProduct(SQLModel):
+    sku: int
+    product_name: str
+    product_recommendations: list[Any] = []

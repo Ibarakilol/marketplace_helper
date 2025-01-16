@@ -19,7 +19,7 @@ TokenDep = Annotated[str, Depends(reusable_oauth2)]
 
 class UsersService:
     @staticmethod
-    async def create_user(*, session: AsyncSession, new_user: UserRegister) -> User:
+    async def create_user(session: AsyncSession, new_user: UserRegister) -> User:
         db_obj = User.model_validate(new_user, update={"hashed_password": get_password_hash(new_user.password)})
         session.add(db_obj)
         await session.commit()
@@ -27,13 +27,13 @@ class UsersService:
         return db_obj
 
     @staticmethod
-    async def get_user_by_email(*, session: AsyncSession, email: str) -> User | None:
+    async def get_user_by_email(session: AsyncSession, email: str) -> User | None:
         statement = select(User).where(User.email == email)
         statement_result = await session.exec(statement)
         return statement_result.first()
 
     @staticmethod
-    async def authenticate_user(*, session: AsyncSession, email: str, password: str) -> User | None:
+    async def authenticate_user(session: AsyncSession, email: str, password: str) -> User | None:
         db_user = await UsersService.get_user_by_email(session=session, email=email)
 
         if not db_user or not verify_password(password, db_user.hashed_password):
@@ -47,12 +47,12 @@ class UsersService:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
             token_data = TokenPayload(**payload)
         except (InvalidTokenError, ValidationError):
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Could not validate credentials")
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Не удалось подтвердить учетные данные")
 
         user = await session.get(User, token_data.sub)
 
         if not user:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден")
 
         return user
 

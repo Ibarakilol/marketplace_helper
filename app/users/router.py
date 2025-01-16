@@ -6,9 +6,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.config import settings
 from app.core.database import SessionDep
-from app.users.models import Token, UserPublic, UserRegister
+from app.users.models import Token, User, UserPublic, UserRegister, UserUpdate
 from app.users.security import create_access_token
-from app.users.service import UsersService
+from app.users.service import CurrentUser, UsersService
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -19,7 +19,7 @@ async def register_user(session: SessionDep, user_in: UserRegister):
 
     if user:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="The user with this email already exists in the system"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Пользователь с этой электронной почтой уже существует"
         )
 
     new_user = UserRegister.model_validate(user_in)
@@ -32,7 +32,19 @@ async def login_user(session: SessionDep, form_data: Annotated[OAuth2PasswordReq
     user = await UsersService.authenticate_user(session=session, email=form_data.username, password=form_data.password)
 
     if not user:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect email or password")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Неверный адрес электронной почты или пароль"
+        )
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     return Token(access_token=create_access_token(user.id, expires_delta=access_token_expires))
+
+
+@router.patch("/profile", response_model=UserPublic)
+async def update_user(session: SessionDep, current_user: CurrentUser, user_in: UserUpdate):
+    user_data = user_in.model_dump(exclude_unset=True)
+    current_user.sqlmodel_update(user_data)
+    session.add(current_user)
+    await session.commit()
+    await session.refresh(current_user)
+    return current_user

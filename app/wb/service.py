@@ -3,7 +3,6 @@ from typing import Any
 
 import aiohttp
 from fastapi import HTTPException, status
-from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app.users.models import User
 from app.wb.models import WbFeedback
@@ -13,17 +12,17 @@ class WbService:
     @staticmethod
     def parse_feedback(feedback: Any) -> WbFeedback:
         return {
-            "id": feedback["id"],
+            "feedback_id": feedback["id"],
             "sku": feedback["productDetails"]["nmId"],
-            "product": feedback["productDetails"]["productName"],
+            "product_name": feedback["productDetails"]["productName"],
+            "product_valuation": feedback["productValuation"],
             "name": feedback["userName"] if feedback["userName"] != "Пользователь" else "",
             "text": feedback["text"],
-            "product_valuation": feedback["productValuation"],
             "with_photo": isinstance(feedback["photoLinks"], list),
         }
 
     @staticmethod
-    async def get_feedbacks(*, current_user: User, skip: int = 0, limit: int = 100) -> list[WbFeedback]:
+    async def get_feedbacks(current_user: User, skip: int = 0, limit: int = 100) -> list[WbFeedback]:
         async with aiohttp.ClientSession() as client_session:
             try:
                 async with client_session.get(
@@ -37,7 +36,7 @@ class WbService:
                 raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Ошибка получения отзывов")
 
     @staticmethod
-    async def get_feedback(*, current_user: User, feedback_id: str) -> WbFeedback:
+    async def get_feedback(current_user: User, feedback_id: str) -> WbFeedback:
         async with aiohttp.ClientSession() as client_session:
             try:
                 async with client_session.get(
@@ -51,7 +50,7 @@ class WbService:
                 raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Ошибка получения отзыва")
 
     @staticmethod
-    async def process_feedback(*, session: AsyncSession, current_user: User, feedback_id: str, reply: str) -> None:
+    async def process_feedback(current_user: User, feedback_id: str, reply: str) -> None:
         async with aiohttp.ClientSession() as client_session:
             try:
                 data = {"id": feedback_id, "text": reply}
