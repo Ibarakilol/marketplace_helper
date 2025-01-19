@@ -1,5 +1,4 @@
 import json
-from typing import Any
 
 import aiohttp
 from fastapi import HTTPException, status
@@ -10,7 +9,7 @@ from app.wb.models import WbFeedback
 
 class WbService:
     @staticmethod
-    def parse_feedback(feedback: Any) -> WbFeedback:
+    def parse_feedback(feedback: dict) -> WbFeedback:
         return {
             "feedback_id": feedback["id"],
             "sku": feedback["productDetails"]["nmId"],
