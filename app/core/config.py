@@ -8,13 +8,13 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_ignore_empty=True)
 
-    PROJECT_NAME: str
+    PROJECT_NAME: str = "Marketplace Helper API"
     PREFIX: str = "/api/v1"
     ENVIRONMENT: Literal["dev", "production"] = "dev"
 
     ALGORITHM: str = "HS256"
     SECRET_KEY: str = "changethis"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # Week
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
 
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str = ""

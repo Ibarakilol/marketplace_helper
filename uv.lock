@@ -563,7 +563,7 @@ wheels = [
 ]
 
 [[package]]
-name = "marketplace-helper"
+name = "marketplace-helper-api"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
@@ -572,7 +572,6 @@ dependencies = [
     { name = "asyncpg" },
     { name = "fastapi", extra = ["standard"] },
     { name = "g4f" },
-    { name = "jinja2" },
     { name = "passlib", extra = ["bcrypt"] },
     { name = "pydantic-settings" },
     { name = "pyjwt" },
@@ -592,7 +591,6 @@ requires-dist = [
     { name = "asyncpg", specifier = ">=0.30.0" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.6" },
     { name = "g4f", extras = ["openai"], specifier = ">=0.4.1.1" },
-    { name = "jinja2", specifier = ">=3.1.5" },
     { name = "passlib", extras = ["bcrypt"], specifier = ">=1.7.4" },
     { name = "pydantic-settings", specifier = ">=2.7.1" },
     { name = "pyjwt", specifier = ">=2.10.1" },
