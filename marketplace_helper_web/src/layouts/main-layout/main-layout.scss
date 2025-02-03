@@ -1,0 +1,21 @@
+@import "src/scss/variables.scss";
+
+.main-layout {
+  display: grid;
+  grid-template-areas:
+    "navbar toppanel"
+    "navbar .";
+  grid-template-columns: $navbar-width 1fr;
+  grid-template-rows: 72px 1fr;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-layout_headless {
+  grid-template-areas: "navbar .";
+  grid-template-rows: 1fr;
+}
+
+.main-layout__content {
+  overflow-y: auto;
+}
