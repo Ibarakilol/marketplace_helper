@@ -11,13 +11,15 @@ $font-weight-regular: 400;
 $font-weight-medium: 500;
 $font-weight-bold: 700;
 
-// BLACK PALETTE
-$color-black-80: rgba(0, 0, 0, 0.8);
-$color-black-20: rgba(0, 0, 0, 0.2);
-$color-black-5: rgba(0, 0, 0, 0.05);
-
-// WHITE PALETTE
-$color-white-100: rgba(255, 255, 255, 1);
+// BLACK HEX PALETTE
+$color-hex-black-80: #333333;
+$color-hex-black-60: #666666;
+$color-hex-black-50: #7f7f7f;
+$color-hex-black-20: #c4c4c4;
+$color-hex-black-10: #e5e5e5;
+$color-hex-black-5: #f2f2f2;
+$color-hex-black-4: #f6f6f6;
+$color-hex-black-0: #ffffff;
 
 // OTHER COLORS
 $color-red: #d95151;

@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 @mixin text(
-  $color: $color-black-80,
+  $color: $color-hex-black-80,
   $font-family: $font-main,
   $size: $font-size-body,
   $weight: $font-weight-regular,
@@ -27,6 +27,16 @@
     $weight: $weight,
     $letter-spacing: 0.3px,
     $line-height: 24px
+  );
+}
+
+@mixin textCaption($color: $color-text-body, $weight: $font-weight-regular) {
+  @include text(
+    $color: $color,
+    $size: $font-size-accent,
+    $weight: $weight,
+    $letter-spacing: 0.24px,
+    $line-height: 16px
   );
 }
 

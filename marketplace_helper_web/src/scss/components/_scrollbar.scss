@@ -1,17 +1,17 @@
 @import "../variables.scss";
 
 .scrollbar {
-  scrollbar-color: $color-black-20 $color-black-5;
+  scrollbar-color: $color-hex-black-20 $color-hex-black-5;
   scrollbar-width: thin;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  background-color: $color-black-5;
+  background-color: $color-hex-black-5;
   border-radius: 3px;
 }
 
 .scrollbar::-webkit-scrollbar {
-  background-color: $color-black-5;
+  background-color: $color-hex-black-5;
   width: 6px;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: $color-black-20;
+  background-color: $color-hex-black-20;
   border-radius: 3px;
 }
 
