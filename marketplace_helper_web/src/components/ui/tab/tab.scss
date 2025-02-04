@@ -1,5 +1,5 @@
-@import "src/scss/variables.scss";
-@import "src/scss/mixins.scss";
+@import "@/scss/variables.scss";
+@import "@/scss/mixins.scss";
 
 .tab {
   @include reset-link();
@@ -24,15 +24,15 @@
 }
 
 .tab_active {
-  background-color: rgba($color: $color-theme-assist, $alpha: 0.12);
+  background-color: $color-theme-primary;
   border-color: transparent;
   pointer-events: none;
 
   .tab__title {
-    @include textBody($weight: $font-weight-bold, $color: $color-theme-primary);
+    @include textBody($color: $color-hex-black-0, $weight: $font-weight-medium);
   }
 }
 
 .tab__title {
-  @include textBody($weight: $font-weight-medium);
+  @include textBody();
 }

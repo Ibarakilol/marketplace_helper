@@ -1,4 +1,4 @@
-import type { IApiFeedback, IFeedback } from 'src/interfaces';
+import type { IApiFeedback, IFeedback } from '@/interfaces';
 
 export const mapApiToFeedback = ({
   feedback_id,

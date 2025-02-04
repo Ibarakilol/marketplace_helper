@@ -34,7 +34,7 @@ const App = observer(() => {
           {!token && AuthRoutes()}
           {/* <Route element={<PrivateRoute isRedirect={!token} />}>{MainRoutes()}</Route> */}
           {MainRoutes()}
-          <Route element={<Navigate replace to={AppRoute.WILDBERRIES} />} path="*" />
+          <Route element={<Navigate replace to={AppRoute.WILDBERRIES_FEEDBACKS} />} path="*" />
         </Routes>
       </Router>
     </div>

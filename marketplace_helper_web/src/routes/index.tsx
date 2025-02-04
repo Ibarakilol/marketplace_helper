@@ -5,16 +5,25 @@ import AuthPage from '@/pages/auth-page';
 import MainPage from '@/pages/main-page';
 import SettingsPage from '@/pages/settings-page';
 
-import { AppRoute } from '@/constants';
+import { AppRoute, WILDBERRIES_TAB_ROUTES } from '@/constants';
 
 const MAIN_ROUTES = [
   {
-    path: AppRoute.WILDBERRIES,
+    path: AppRoute.WILDBERRIES_FEEDBACKS,
     component: MainPage,
+    tabs: WILDBERRIES_TAB_ROUTES,
+    title: 'Wildberries отзывы',
+  },
+  {
+    path: AppRoute.WILDBERRIES_PRODUCTS,
+    component: MainPage,
+    tabs: WILDBERRIES_TAB_ROUTES,
+    title: 'Wildberries товары',
   },
   {
     path: AppRoute.SETTINGS,
     component: SettingsPage,
+    title: 'Настройки',
   },
 ];
 

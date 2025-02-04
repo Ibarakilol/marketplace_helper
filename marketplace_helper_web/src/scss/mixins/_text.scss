@@ -16,11 +16,11 @@
   line-height: $line-height;
 }
 
-@mixin textBody($color: $color-text-body, $weight: $font-weight-regular) {
+@mixin textBody($color: $color-hex-black-80, $weight: $font-weight-regular) {
   @include text($color: $color, $weight: $weight, $line-height: 20px);
 }
 
-@mixin textAccent($color: $color-text-body, $weight: $font-weight-regular) {
+@mixin textAccent($color: $color-hex-black-80, $weight: $font-weight-regular) {
   @include text(
     $color: $color,
     $size: $font-size-accent,
@@ -30,7 +30,7 @@
   );
 }
 
-@mixin textCaption($color: $color-text-body, $weight: $font-weight-regular) {
+@mixin textCaption($color: $color-hex-black-80, $weight: $font-weight-regular) {
   @include text(
     $color: $color,
     $size: $font-size-caption,
@@ -40,6 +40,6 @@
   );
 }
 
-@mixin textSubtitle($color: $color-text-body, $weight: $font-weight-regular) {
+@mixin textSubtitle($color: $color-hex-black-80, $weight: $font-weight-regular) {
   @include text($color: $color, $size: $font-size-subtitle, $weight: $weight, $line-height: 28px);
 }

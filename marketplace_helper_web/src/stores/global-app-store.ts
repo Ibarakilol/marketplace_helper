@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import { APP_LOCALSTORAGE_NAME, CONFIG_REQUIRED_PARAMS_MAPPED } from '@/constants';
+import type { IUser } from '@/interfaces';
 
 class GlobalAppStore {
   init() {
@@ -11,6 +12,7 @@ class GlobalAppStore {
 
   isInternalError: boolean = false;
   token: string = localStorage.getItem(APP_LOCALSTORAGE_NAME) || '';
+  user: IUser = { id: '1', name: 'Никита' };
 
   constructor() {
     makeAutoObservable(this);

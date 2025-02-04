@@ -1,4 +1,4 @@
-import Tab from 'src/components/ui/tab';
+import Tab from '@/components/ui/tab';
 
 import type { TabListProps } from './tab-list.props';
 

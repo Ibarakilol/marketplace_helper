@@ -3,7 +3,7 @@
 .main-layout {
   display: grid;
   grid-template-areas:
-    "navbar toppanel"
+    "navbar header"
     "navbar .";
   grid-template-columns: $navbar-width 1fr;
   grid-template-rows: 72px 1fr;
