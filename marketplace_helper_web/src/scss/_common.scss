@@ -26,10 +26,10 @@ body {
 }
 
 .app__error-title {
-  @include textSubtitle($weight: $font-weight-bold, $color: $color-alert-error);
+  @include textSubtitle($weight: $font-weight-bold, $color: $color-red);
   @include reset-description();
 }
 
 .app__error-list {
-  @include textAccent($color: $color-alert-error);
+  @include textAccent($color: $color-red);
 }

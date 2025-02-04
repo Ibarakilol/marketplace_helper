@@ -1,4 +1,4 @@
-@import "src/scss/variables.scss";
+@import "@/scss/variables.scss";
 
 .main-layout {
   display: grid;
@@ -9,11 +9,6 @@
   grid-template-rows: 72px 1fr;
   height: 100vh;
   width: 100%;
-}
-
-.main-layout_headless {
-  grid-template-areas: "navbar .";
-  grid-template-rows: 1fr;
 }
 
 .main-layout__content {

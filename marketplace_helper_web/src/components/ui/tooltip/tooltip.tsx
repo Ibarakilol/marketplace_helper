@@ -12,7 +12,7 @@ const Component = ({ isUnmounting, style, text, theme, onAnimationEnd }: Tooltip
     style={style}
     onAnimationEnd={onAnimationEnd}
   >
-    <span className="tooltip__text">{text}</span>
+    <p className="tooltip__text">{text}</p>
   </div>
 );
 

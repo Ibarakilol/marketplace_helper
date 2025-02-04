@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
-import PrivateRoute from '@/components/common/private-route';
-
+// import PrivateRoute from '@/components/common/private-route';
 import globalAppStore from '@/stores/global-app-store';
 
 import { AppRoute } from '@/constants';
@@ -33,7 +32,8 @@ const App = observer(() => {
       <Router>
         <Routes>
           {!token && AuthRoutes()}
-          <Route element={<PrivateRoute isRedirect={!token} />}>{MainRoutes()}</Route>
+          {/* <Route element={<PrivateRoute isRedirect={!token} />}>{MainRoutes()}</Route> */}
+          {MainRoutes()}
           <Route element={<Navigate replace to={AppRoute.WILDBERRIES} />} path="*" />
         </Routes>
       </Router>

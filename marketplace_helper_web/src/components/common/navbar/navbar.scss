@@ -1,0 +1,35 @@
+@import "@/scss/variables.scss";
+@import "@/scss/mixins.scss";
+
+.navbar {
+  background-color: $color-theme-primary;
+  display: grid;
+  gap: 24px;
+  grid-area: navbar;
+  grid-template-rows: 1fr max-content;
+  justify-items: center;
+  margin: 0;
+  padding: 20px 0 24px;
+}
+
+.navbar__menu {
+  @include reset-list();
+  align-content: start;
+  display: grid;
+  gap: 20px;
+}
+
+.navbar__menu_bottom {
+  padding-top: 20px;
+  position: relative;
+
+  &::before {
+    background-color: $color-hex-black-60;
+    content: "";
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 20px;
+  }
+}

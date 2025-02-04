@@ -33,7 +33,7 @@
 @mixin textCaption($color: $color-text-body, $weight: $font-weight-regular) {
   @include text(
     $color: $color,
-    $size: $font-size-accent,
+    $size: $font-size-caption,
     $weight: $weight,
     $letter-spacing: 0.24px,
     $line-height: 16px

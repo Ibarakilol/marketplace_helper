@@ -1,0 +1,49 @@
+@import "@/scss/variables.scss";
+@import "@/scss/mixins.scss";
+
+.navbar-item {
+  @include reset-list-item();
+}
+
+.navbar-item__link {
+  @include reset-link();
+  align-items: center;
+  border-radius: 8px;
+  color: $color-hex-black-0;
+  cursor: pointer;
+  display: grid;
+  height: 36px;
+  justify-items: center;
+  transition: background-color $transition-time;
+  width: 36px;
+
+  &:hover:not(.navbar-item__link_active) {
+    background-color: $color-hex-black-80;
+  }
+}
+
+.navbar-item__link_active {
+  background-color: $color-hex-black-60;
+  cursor: auto;
+
+  &:hover {
+    background-color: $color-hex-black-60;
+  }
+}
+
+.navbar-item__button {
+  @include reset-button();
+  align-items: center;
+  border-radius: 8px;
+  color: $color-hex-black-0;
+  cursor: pointer;
+  display: grid;
+  height: 36px;
+  justify-items: center;
+  transition: background-color $transition-time;
+  width: 36px;
+
+  &:hover:not(:disabled) {
+    background-color: $color-hex-black-80;
+  }
+}

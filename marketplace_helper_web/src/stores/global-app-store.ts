@@ -29,6 +29,10 @@ class GlobalAppStore {
     this.setToken('');
   }
 
+  logout() {
+    this.removeToken();
+  }
+
   checkToken() {
     const TOKEN = import.meta.env.VITE_APP_TOKEN;
 
