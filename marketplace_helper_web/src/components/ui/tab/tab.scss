@@ -1,0 +1,38 @@
+@import "src/scss/variables.scss";
+@import "src/scss/mixins.scss";
+
+.tab {
+  @include reset-link();
+  align-items: center;
+  background-color: $color-hex-black-0;
+  border: 1px solid $color-hex-black-20;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: grid;
+  padding: 9px 11px;
+  transition:
+    background-color $transition-time,
+    border-color $transition-time;
+
+  &:hover {
+    border-color: $color-hex-black-60;
+
+    .tab__title {
+      color: $color-hex-black-85;
+    }
+  }
+}
+
+.tab_active {
+  background-color: rgba($color: $color-theme-assist, $alpha: 0.12);
+  border-color: transparent;
+  pointer-events: none;
+
+  .tab__title {
+    @include textBody($weight: $font-weight-bold, $color: $color-theme-primary);
+  }
+}
+
+.tab__title {
+  @include textBody($weight: $font-weight-medium);
+}

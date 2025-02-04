@@ -1,0 +1,12 @@
+@import "src/scss/mixins.scss";
+
+.tab-list {
+  @include reset-list();
+  display: grid;
+  gap: 12px;
+  grid-auto-flow: column;
+}
+
+.tab-list__item {
+  @include reset-list-item();
+}
