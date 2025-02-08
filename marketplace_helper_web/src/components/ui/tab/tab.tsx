@@ -1,17 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
+
+import { buttonVariants } from '../button';
 
 import type { TabProps } from './tab.props';
 
-import './tab.scss';
-
-const Tab = ({ className, link, title }: TabProps) => {
+const Tab = ({ link, title }: TabProps) => {
   return (
     <NavLink
-      className={({ isActive }) => clsx('tab', isActive && 'tab_active', className)}
+      className={({ isActive }) => buttonVariants({ variant: isActive ? 'default' : 'outline' })}
       to={link}
     >
-      <span className="tab__title">{title}</span>
+      {title}
     </NavLink>
   );
 };

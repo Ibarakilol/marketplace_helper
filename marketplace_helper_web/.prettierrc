@@ -9,7 +9,7 @@
   "trailingComma": "es5",
   "overrides": [
     {
-      "files": ["**/*.css", "**/*.scss"],
+      "files": ["**/*.css"],
       "options": {
         "singleQuote": false
       }

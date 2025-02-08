@@ -1,14 +1,11 @@
 import type React from 'react';
 import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
 
-import TooltipTrigger from '@/components/ui/tooltip-trigger';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 import type { NavbarItemProps } from './navbar-item.props';
 
-import './navbar-item.scss';
-
-function NavbarItem({ children, className, buttonProps, linkProps, tooltipText }: NavbarItemProps) {
+const NavbarItem = ({ children, buttonProps, linkProps, tooltipText }: NavbarItemProps) => {
   const renderInnerElement = () => {
     if (buttonProps) {
       const { onClick } = buttonProps;
@@ -20,7 +17,7 @@ function NavbarItem({ children, className, buttonProps, linkProps, tooltipText }
 
       return (
         <button
-          className="navbar-item__button"
+          className="grid items-center rounded-lg text-white h-9 justify-items-center w-9 hover:bg-zinc-600 duration-150"
           aria-label={tooltipText}
           onClick={handleButtonClick}
         >
@@ -34,7 +31,11 @@ function NavbarItem({ children, className, buttonProps, linkProps, tooltipText }
 
       if (isExternal) {
         return (
-          <a className="navbar-item__link" aria-label={tooltipText} href={url}>
+          <a
+            className="grid items-center rounded-lg text-white h-9 justify-items-center w-9 hover:bg-zinc-600 duration-150"
+            aria-label={tooltipText}
+            href={url}
+          >
             {children}
           </a>
         );
@@ -42,9 +43,7 @@ function NavbarItem({ children, className, buttonProps, linkProps, tooltipText }
 
       return (
         <NavLink
-          className={({ isActive }) =>
-            clsx('navbar-item__link', isActive && 'navbar-item__link_active')
-          }
+          className="grid items-center rounded-lg text-white h-9 justify-items-center w-9 hover:bg-zinc-600 duration-150"
           aria-label={tooltipText}
           to={url}
         >
@@ -57,10 +56,15 @@ function NavbarItem({ children, className, buttonProps, linkProps, tooltipText }
   };
 
   return (
-    <li className={clsx('navbar-item', className)}>
-      <TooltipTrigger text={tooltipText}>{renderInnerElement()}</TooltipTrigger>
+    <li>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>{renderInnerElement()}</TooltipTrigger>
+          <TooltipContent>{tooltipText}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </li>
   );
-}
+};
 
 export default NavbarItem;

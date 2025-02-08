@@ -2,13 +2,11 @@ import Tab from '@/components/ui/tab';
 
 import type { TabListProps } from './tab-list.props';
 
-import './tab-list.scss';
-
 const TabList = ({ tabs }: TabListProps) => {
   return (
-    <ul className="tab-list">
+    <ul className="grid gap-3 grid-flow-col">
       {tabs.map(({ link, title }) => (
-        <li key={title} className="tab-list__item">
+        <li key={title}>
           <Tab link={link} title={title} />
         </li>
       ))}

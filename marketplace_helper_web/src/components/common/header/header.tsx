@@ -6,19 +6,17 @@ import globalAppStore from '@/stores/global-app-store';
 
 import type { HeaderProps } from './header.props';
 
-import './header.scss';
-
 const Header = observer(({ tabs, title }: HeaderProps) => {
   const { user } = globalAppStore;
   const subtitle = `Здравствуйте, ${user.name}!`;
 
   return (
-    <header className="header">
-      <div className="header__intro">
-        <h1 className="header__title">{title}</h1>
-        {subtitle && <p className="header__subtitle">{subtitle}</p>}
+    <header className="grid items-center bg-white border-solid border-b border-b-zinc-200 grid-flow-col justify-between px-8 [grid-area:header]">
+      <div className="grid self-center">
+        <h1 className="font-bold text-sm">{title}</h1>
+        {subtitle && <p className="text-xs">{subtitle}</p>}
       </div>
-      <div className="header__content">{tabs && <TabList tabs={tabs} />}</div>
+      <div className="grid gap-7 grid-flow-col">{tabs && <TabList tabs={tabs} />}</div>
     </header>
   );
 });

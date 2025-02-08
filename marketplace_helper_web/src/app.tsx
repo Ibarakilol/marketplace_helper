@@ -7,19 +7,19 @@ import globalAppStore from '@/stores/global-app-store';
 import { AppRoute } from '@/constants';
 import { AuthRoutes, MainRoutes } from '@/routes';
 
-import '@/scss/index.scss';
+import '@/index.css';
 
 const App = observer(() => {
   const { isConfigCorrect, missingConfigVars, token } = globalAppStore;
 
   if (!isConfigCorrect) {
     return (
-      <div className="app app_err">
-        <h2 className="app__error-title">Не удалось загрузить параметры конфигурации:</h2>
-        <ul className="app__error-list">
+      <div className="h-full min-h-screen grid content-center justify-center pb-20">
+        <h2 className="text-red-500 font-bold">Не удалось загрузить параметры конфигурации:</h2>
+        <ul className="list-disc my-4 ps-10 text-red-500">
           {missingConfigVars.map((item) => (
-            <li className="app__error-list-item" key={item.name}>
-              <span className="app__error-text">{item.name}</span>
+            <li key={item.name}>
+              <span>{item.name}</span>
             </li>
           ))}
         </ul>
@@ -28,7 +28,7 @@ const App = observer(() => {
   }
 
   return (
-    <div className="app">
+    <div className="h-full min-h-screen">
       <Router>
         <Routes>
           {!token && AuthRoutes()}

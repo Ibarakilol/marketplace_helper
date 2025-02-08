@@ -22,11 +22,13 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
       curly: 'error',
       'default-case': 'error',
+      'no-duplicate-imports': ['error', { includeExports: true }],
+      'no-unused-vars': 'warn',
+      'react-refresh/only-export-components': 'off',
       'require-await': 'error',
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': [
