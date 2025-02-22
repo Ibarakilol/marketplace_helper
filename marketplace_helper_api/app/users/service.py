@@ -47,7 +47,9 @@ class UsersService:
             payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
             token_data = TokenPayload(**payload)
         except (InvalidTokenError, ValidationError):
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Не удалось подтвердить учетные данные")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED, detail="Не удалось подтвердить учетные данные"
+            )
 
         user = await session.get(User, token_data.sub)
 

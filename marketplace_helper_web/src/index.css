@@ -61,10 +61,18 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased overflow-y-hidden;
   }
+}
+
+.navbar-item {
+  @apply grid items-center rounded-lg text-white h-9 justify-items-center w-9 hover:bg-zinc-600 duration-150;
+}
+
+.navbar-item.active {
+  @apply bg-zinc-600;
 }

@@ -1,8 +1,9 @@
-import baseAxios from 'axios';
+import baseAxios, { type InternalAxiosRequestConfig } from 'axios';
 
 import globalAppStore from '@/stores/global-app-store';
 
 import { ApiMethod, ApiResponseStatus } from '@/constants';
+import { getMockedApiResponse } from '@/mocks/api';
 
 const api = baseAxios.create({
   baseURL: window.API_URL,
@@ -27,21 +28,13 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => {
-    if (globalAppStore.isInternalError) {
-      globalAppStore.setIsInternalError(false);
-    }
-
-    return response;
-  },
+  (response) => response,
   (error) => {
     const {
-      status,
-      config: { method = '', url = '' } = {},
-      data: { message = '' } = {},
-    } = error?.response || {};
-
-    const errorMethod = error?.config?.method;
+      status = ApiResponseStatus.INTERNAL_ERROR,
+      config: { method = '', url = '', data = '', params = {} } = {},
+      data: { detail = '' } = {},
+    } = error?.response || error;
 
     let title = `${status}: ${method.toUpperCase()} ${url}`;
 
@@ -49,18 +42,23 @@ api.interceptors.response.use(
       title = 'An unexpected error has occurred';
     }
 
-    if (errorMethod === ApiMethod.GET) {
-      throw new Error(`${title}\n${message}`);
+    if (status === ApiResponseStatus.NOT_FOUND || status === ApiResponseStatus.INTERNAL_ERROR) {
+      return Promise.resolve(
+        getMockedApiResponse({
+          method,
+          url,
+          data,
+          params,
+        } as Required<InternalAxiosRequestConfig>)
+      );
+    }
+
+    if (method === ApiMethod.GET) {
+      throw new Error(`${title}\n${detail}`);
     }
 
     if (status === ApiResponseStatus.UNAUTHORIZED) {
       globalAppStore.removeToken();
-    }
-
-    if (status === ApiResponseStatus.INTERNAL_ERROR) {
-      globalAppStore.setIsInternalError(true);
-    } else if (globalAppStore.isInternalError) {
-      globalAppStore.setIsInternalError(false);
     }
 
     return Promise.reject(error);

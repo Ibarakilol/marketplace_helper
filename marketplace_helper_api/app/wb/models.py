@@ -1,5 +1,3 @@
-from typing import Any
-
 from sqlmodel import Field, SQLModel
 
 
@@ -11,9 +9,4 @@ class WbFeedback(SQLModel):
     name: str
     text: str | None = None
     with_photo: bool
-
-
-class WbProduct(SQLModel):
-    sku: int = Field(index=True)
-    product_name: str = Field(index=True)
-    product_recommendations: list[Any] = []
+    reply_text: str | None = None

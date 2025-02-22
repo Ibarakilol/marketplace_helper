@@ -1,7 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-import { APP_LOCALSTORAGE_NAME, CONFIG_REQUIRED_PARAMS_MAPPED } from '@/constants';
-import type { IUser } from '@/interfaces';
+import { APP_LOCALSTORAGE_JWT, CONFIG_REQUIRED_PARAMS_MAPPED } from '@/constants';
 
 class GlobalAppStore {
   init() {
@@ -10,36 +9,30 @@ class GlobalAppStore {
     }
   }
 
-  isInternalError: boolean = false;
-  token: string = localStorage.getItem(APP_LOCALSTORAGE_NAME) || '';
-  user: IUser = { id: '1', name: 'Никита' };
+  token: string = localStorage.getItem(APP_LOCALSTORAGE_JWT) || '';
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   setToken(token: string) {
     this.token = token;
-  }
 
-  setIsInternalError(isError: boolean) {
-    this.isInternalError = isError;
+    if (token) {
+      localStorage.setItem(APP_LOCALSTORAGE_JWT, token);
+    }
   }
 
   removeToken() {
-    localStorage.removeItem(APP_LOCALSTORAGE_NAME);
+    localStorage.removeItem(APP_LOCALSTORAGE_JWT);
     this.setToken('');
-  }
-
-  logout() {
-    this.removeToken();
   }
 
   checkToken() {
     const TOKEN = import.meta.env.VITE_APP_TOKEN;
 
     if (TOKEN && this.token !== TOKEN) {
-      localStorage.setItem(APP_LOCALSTORAGE_NAME, TOKEN);
+      localStorage.setItem(APP_LOCALSTORAGE_JWT, TOKEN);
       this.setToken(TOKEN);
     }
   }

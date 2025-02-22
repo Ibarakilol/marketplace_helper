@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
-// import PrivateRoute from '@/components/common/private-route';
+import PrivateRoute from '@/components/common/private-route';
+import { Toaster } from '@/components/ui/toaster';
+
 import globalAppStore from '@/stores/global-app-store';
 
 import { AppRoute } from '@/constants';
@@ -14,7 +16,7 @@ const App = observer(() => {
 
   if (!isConfigCorrect) {
     return (
-      <div className="h-full min-h-screen grid content-center justify-center pb-20">
+      <div className="min-h-screen grid content-center justify-center pb-20">
         <h2 className="text-red-500 font-bold">Не удалось загрузить параметры конфигурации:</h2>
         <ul className="list-disc my-4 ps-10 text-red-500">
           {missingConfigVars.map((item) => (
@@ -28,15 +30,16 @@ const App = observer(() => {
   }
 
   return (
-    <div className="h-full min-h-screen">
+    <div className="min-h-screen">
       <Router>
         <Routes>
           {!token && AuthRoutes()}
-          {/* <Route element={<PrivateRoute isRedirect={!token} />}>{MainRoutes()}</Route> */}
+          <Route element={<PrivateRoute isRedirect={!token} />}>{MainRoutes()}</Route>
           {MainRoutes()}
           <Route element={<Navigate replace to={AppRoute.WILDBERRIES_FEEDBACKS} />} path="*" />
         </Routes>
       </Router>
+      <Toaster />
     </div>
   );
 });

@@ -13,7 +13,7 @@ from app.users.service import CurrentUser, UsersService
 router = APIRouter(prefix="/users", tags=["Users"])
 
 
-@router.post("/register", response_model=UserPublic)
+@router.post("/register", response_model=Token)
 async def register_user(session: SessionDep, user_in: UserRegister):
     user = await UsersService.get_user_by_email(session=session, email=user_in.email)
 
@@ -24,7 +24,8 @@ async def register_user(session: SessionDep, user_in: UserRegister):
 
     new_user = UserRegister.model_validate(user_in)
     user = await UsersService.create_user(session=session, new_user=new_user)
-    return user
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    return Token(access_token=create_access_token(user.id, expires_delta=access_token_expires))
 
 
 @router.post("/login", response_model=Token)
@@ -38,6 +39,12 @@ async def login_user(session: SessionDep, form_data: Annotated[OAuth2PasswordReq
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     return Token(access_token=create_access_token(user.id, expires_delta=access_token_expires))
+
+
+@router.get("/profile", response_model=UserPublic)
+async def get_user(session: SessionDep, current_user: CurrentUser):
+    user = await UsersService.get_user_by_email(session=session, email=current_user.email)
+    return user
 
 
 @router.patch("/profile", response_model=UserPublic)

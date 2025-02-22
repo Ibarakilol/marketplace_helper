@@ -27,7 +27,6 @@ export default tseslint.config(
       curly: 'error',
       'default-case': 'error',
       'no-duplicate-imports': ['error', { includeExports: true }],
-      'no-unused-vars': 'warn',
       'react-refresh/only-export-components': 'off',
       'require-await': 'error',
       'simple-import-sort/exports': 'error',

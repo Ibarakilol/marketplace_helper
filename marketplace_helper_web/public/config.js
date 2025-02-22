@@ -1,1 +1,1 @@
-window.API_URL = 'http://localhost:5555/v1';
+window.API_URL = 'http://localhost:8000/api/v1';

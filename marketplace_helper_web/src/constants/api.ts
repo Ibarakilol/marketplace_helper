@@ -17,11 +17,11 @@ export enum ApiResponseStatus {
 }
 
 export const ApiRoute = {
+  GENERATE_REPLY: 'generator/generate-reply',
   USERS_REGISTER: 'users/register',
   USERS_LOGIN: 'users/login',
   USERS_PROFILE: 'users/profile',
   WB_FEEDBACKS: 'wb',
   WB_FEEDBACK: (feedbackId: string) => `wb/${feedbackId}`,
   WB_PROCESS_FEEDBACK: 'wb/process-feedback',
-  WB_GENERATE_REPLY: 'wb/generate-reply',
 };
