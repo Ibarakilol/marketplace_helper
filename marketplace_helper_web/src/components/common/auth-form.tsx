@@ -17,6 +17,7 @@ import { Regex } from '@/constants';
 import type { IUserAuth } from '@/interfaces';
 
 interface AuthFormProps {
+  isLoading?: boolean;
   submitButtonTitle: string;
   onFormSubmit: ({ email, password }: IUserAuth) => Promise<void>;
 }
@@ -31,7 +32,7 @@ const formSchema = z.object({
   }),
 });
 
-const AuthForm = ({ submitButtonTitle, onFormSubmit }: AuthFormProps) => {
+const AuthForm = ({ isLoading, submitButtonTitle, onFormSubmit }: AuthFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,7 +51,12 @@ const AuthForm = ({ submitButtonTitle, onFormSubmit }: AuthFormProps) => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="user@example.com" type="email" {...field} />
+                <Input
+                  disabled={isLoading}
+                  placeholder="user@example.com"
+                  type="email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -63,13 +69,15 @@ const AuthForm = ({ submitButtonTitle, onFormSubmit }: AuthFormProps) => {
             <FormItem>
               <FormLabel>Пароль</FormLabel>
               <FormControl>
-                <Input type="password" {...field} />
+                <Input disabled={isLoading} type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">{submitButtonTitle}</Button>
+        <Button disabled={isLoading} type="submit">
+          {submitButtonTitle}
+        </Button>
       </form>
     </Form>
   );

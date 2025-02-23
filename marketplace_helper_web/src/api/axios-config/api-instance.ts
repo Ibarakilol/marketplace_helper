@@ -2,7 +2,7 @@ import baseAxios, { type InternalAxiosRequestConfig } from 'axios';
 
 import globalAppStore from '@/stores/global-app-store';
 
-import { ApiMethod, ApiResponseStatus } from '@/constants';
+import { ApiResponseStatus } from '@/constants';
 import { getMockedApiResponse } from '@/mocks/api';
 
 const api = baseAxios.create({
@@ -33,14 +33,7 @@ api.interceptors.response.use(
     const {
       status = ApiResponseStatus.INTERNAL_ERROR,
       config: { method = '', url = '', data = '', params = {} } = {},
-      data: { detail = '' } = {},
     } = error?.response || error;
-
-    let title = `${status}: ${method.toUpperCase()} ${url}`;
-
-    if (!status && !method && !url) {
-      title = 'An unexpected error has occurred';
-    }
 
     if (status === ApiResponseStatus.NOT_FOUND || status === ApiResponseStatus.INTERNAL_ERROR) {
       return Promise.resolve(
@@ -51,10 +44,6 @@ api.interceptors.response.use(
           params,
         } as Required<InternalAxiosRequestConfig>)
       );
-    }
-
-    if (method === ApiMethod.GET) {
-      throw new Error(`${title}\n${detail}`);
     }
 
     if (status === ApiResponseStatus.UNAUTHORIZED) {

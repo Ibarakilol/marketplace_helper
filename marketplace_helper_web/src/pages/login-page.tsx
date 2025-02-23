@@ -8,7 +8,7 @@ import userStore from '@/stores/user-store';
 import { AppRoute } from '@/constants';
 
 const LoginPage = observer(() => {
-  const { loginUser } = userStore;
+  const { isLoading, loginUser } = userStore;
 
   return (
     <div className="min-h-screen grid items-center justify-center">
@@ -21,7 +21,7 @@ const LoginPage = observer(() => {
         </div>
 
         <div className="p-6 pt-0">
-          <AuthForm submitButtonTitle="Вход" onFormSubmit={loginUser} />
+          <AuthForm isLoading={isLoading} submitButtonTitle="Вход" onFormSubmit={loginUser} />
           <div className="mt-4 text-center text-sm">
             <NavLink
               className="underline underline-offset-4"

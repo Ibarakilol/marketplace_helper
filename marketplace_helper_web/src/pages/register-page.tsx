@@ -8,7 +8,7 @@ import userStore from '@/stores/user-store';
 import { AppRoute } from '@/constants';
 
 const RegisterPage = observer(() => {
-  const { registerUser } = userStore;
+  const { isLoading, registerUser } = userStore;
 
   return (
     <div className="min-h-screen grid items-center justify-center">
@@ -21,7 +21,11 @@ const RegisterPage = observer(() => {
         </div>
 
         <div className="p-6 pt-0">
-          <AuthForm submitButtonTitle="Регистрация" onFormSubmit={registerUser} />
+          <AuthForm
+            isLoading={isLoading}
+            submitButtonTitle="Регистрация"
+            onFormSubmit={registerUser}
+          />
           <div className="mt-4 text-center text-sm">
             <NavLink className="underline underline-offset-4" aria-label="Вход" to={AppRoute.LOGIN}>
               Вход
