@@ -25,7 +25,6 @@ export const columns: ColumnDef<IFeedback>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Выбрать"
-        disabled={!!row.getValue('replyText')}
       />
     ),
     enableSorting: false,

@@ -12,8 +12,8 @@ class Settings(BaseSettings):
     PREFIX: str = "/api/v1"
     ENVIRONMENT: Literal["dev", "production"] = "dev"
 
-    ALGORITHM: str = "HS256"
-    SECRET_KEY: str = "changethis"
+    ALGORITHM: str
+    SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
 
     POSTGRES_USER: str
