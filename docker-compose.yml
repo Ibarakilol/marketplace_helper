@@ -15,12 +15,14 @@ services:
       - db
     ports:
       - 8000:8000
-    command: bash -c "alembic upgrade head && fastapi run --workers 4 app/main.py"
+    command: bash -c "alembic upgrade head && fastapi run --workers 1 app/main.py"
 
   marketplace_helper_web:
     build:
       context: ./marketplace_helper_web
     container_name: marketplace_helper_web
+    env_file:
+      - marketplace_helper_web/.env
     depends_on:
       - marketplace_helper_api
     ports:

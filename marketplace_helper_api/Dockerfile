@@ -16,4 +16,4 @@ COPY . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen
 
-CMD ["fastapi", "run", "--workers", "4", "app/main.py"]
+CMD ["fastapi", "run", "--workers", "1", "app/main.py"]

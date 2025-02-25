@@ -21,11 +21,20 @@ cd marketplace_helper
 
 2. **Настройка переменных среды:**
 
-Переименовать файл `.env.example` на `.env` в папке `marketplace_helper_api`, изменить `SECRET_KEY` и поменять `POSTGRES_SERVER` на `db`, если установка происходит через Docker Compose
+**WEB:** Переименовать файл `.env.example` на `.env` в папке `marketplace_helper_web`
+
+**API:** Переименовать файл `.env.example` на `.env` в папке `marketplace_helper_api`, изменить `SECRET_KEY` и поменять `POSTGRES_SERVER` на `db`, если установка происходит через Docker Compose
 
 3. **Установка зависимостей и запуск:**
 
-_Этот этап нужен только для тех, кто хочет локально потестировать каждый проект (Web/API) отдельно_
+_Через Docker Compose_
+
+```bash
+docker compose build
+docker compose up
+```
+
+_Для тех, кто хочет локально потестировать каждый проект (Web/API) отдельно_
 
 ```bash
 chmod a+x ./scripts/web.sh && ./scripts/web.sh

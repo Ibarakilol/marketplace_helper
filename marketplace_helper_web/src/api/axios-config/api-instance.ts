@@ -6,7 +6,7 @@ import { ApiResponseStatus } from '@/constants';
 import { getMockedApiResponse } from '@/mocks/api';
 
 const api = baseAxios.create({
-  baseURL: window.API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 api.interceptors.request.use(
